@@ -1,9 +1,9 @@
 FROM mhart/alpine-node
 
-WORKDIR /api
+WORKDIR .
 
-COPY api/ /api/
+COPY . .
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["yarn", "serve"]

@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  bot:
+    container_name: civ-bot
+    build: .
+    restart: always
+    ports:
+      - "7000:3000"
+    networks:
+      - sherpa-network
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3000"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
