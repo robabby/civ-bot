@@ -23,7 +23,7 @@ jobs:
           command: |
             ssh -v $DROPLET_USER@$DROPLET_IP << EOF
 
-              cd ~/civ-bot
+              cd ~/apps/civ-bot
               git pull
 
               docker-compose down
