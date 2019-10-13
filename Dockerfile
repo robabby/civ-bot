@@ -1,5 +1,7 @@
 FROM mhart/alpine-node
 
+ENV NODE_ENV=production
+
 WORKDIR .
 
 COPY package*.json .
