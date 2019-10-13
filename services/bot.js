@@ -5,6 +5,8 @@ const prefix = "!civ ";
 const client = new Discord.Client();
 const token = keys.discordBotToken;
 
+console.log(token);
+
 const USER_MAP = {
   Bliss: "249746356711849985",
   ["FS|Bonez"]: "313380832314261504",
