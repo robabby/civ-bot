@@ -3,39 +3,29 @@ const keys = require("../config/keys");
 
 const prefix = "!civ ";
 const client = new Discord.Client();
-const token = keys.discordBotToken;
-
-console.log(token);
-
+const TOKEN = keys.discordBotToken;
 const USER_MAP = {
   Bliss: "249746356711849985",
   ["FS|Bonez"]: "313380832314261504",
   koa04: "313013436609069058",
   ListoSG: "301056445645062145",
 };
-
 const COMMANDS = {
+  help: "help",
   mention: "mention"
 };
 
-// The ready event is vital, it means that your bot will only start reacting to information
-// from Discord _after_ ready is emitted
-client.on("ready", () => {
-  console.log("I am ready!");
-});
-
-// Create an event listener for messages
 client.on("message", async (message) => {
 
   // if the author of the message is the bot, do nothing
+  // if (message.author.bot) { return; }
   if (message.content.indexOf(prefix) !== 0) { return; }
 
-  // This is the best way to define args. Trust me.
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   const params = args;
 
-  console.log(command, params, keys.discordClientId);
+  console.log(command, params);
 
   // TODO: Figure out how to use emojis
   // const emoji = client.emojis.find("name", "nice");
@@ -54,26 +44,47 @@ client.on("message", async (message) => {
     return message;
   }
 
+  const createHelpResponse = () => {
+    const res = {
+      embed: {
+        author: {
+          icon_url: client.user.avatarURL,
+          name: client.user.username
+        },
+        color: 3447003,
+        description: "A bot written by Bliss to help map Steam names to Discord names to notify people when it's their turn in Civilization 6 Multiplayer Games",
+        timestamp: new Date(),
+        title: "Civ6 Mention Bot",
+        url: "https://github.com/robabby/civ-bot",
+      }
+    };
+
+    return res;
+  };
+
   const sendResponse = (payload) => {
-    console.log("payload: ", payload)
     message.channel.send(payload);
   };
 
   switch (command) {
     case COMMANDS.mention:
-      console.log("Mention command")
       const steamName = params[0];
-      console.log(steamName);
       const res = createMentionResponse(steamName);
-      console.log(res)
+      sendResponse(res);
+      break;
+    case COMMANDS.help:
+      const res = createHelpResponse();
       sendResponse(res);
       break;
     default:
-      console.log("switch");
+      const res = "Command not found. To use this bot type `!civ mention [Steam Username]` to mention someone who's been added to this app. Type `!civ help` for more info.";
   }
 });
 
-// Log our bot in
-client.login(token);
+client.login(TOKEN);
+
+client.on("ready", () => {
+  console.log("I am ready!");
+});
 
 module.exports = client;
