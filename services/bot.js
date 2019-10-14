@@ -69,15 +69,17 @@ client.on("message", async (message) => {
   switch (command) {
     case COMMANDS.mention:
       const steamName = params[0];
-      const res = createMentionResponse(steamName);
-      sendResponse(res);
+      const mentionRes = createMentionResponse(steamName);
+      sendResponse(mentionRes);
       break;
     case COMMANDS.help:
-      const res = createHelpResponse();
-      sendResponse(res);
+      const helpRes = createHelpResponse();
+      sendResponse(helpRes);
       break;
     default:
-      const res = "Command not found. To use this bot type `!civ mention [Steam Username]` to mention someone who's been added to this app. Type `!civ help` for more info.";
+      const defaultRes = "Command not found. To use this bot type `!civ mention [Steam Username]` to mention someone who's been added to this app. Type `!civ help` for more info.";
+
+      return defaultRes;
   }
 });
 
