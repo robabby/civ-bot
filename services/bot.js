@@ -54,7 +54,7 @@ client.on("message", async (message) => {
         color: 3447003,
         description: "A bot written by Bliss to help map Steam names to Discord names to notify people when it's their turn in Civilization 6 Multiplayer Games",
         timestamp: new Date(),
-        title: "Civ6 Mention Bot",
+        title: "Github URL",
         url: "https://github.com/robabby/civ-bot",
       }
     };
@@ -79,7 +79,7 @@ client.on("message", async (message) => {
     default:
       const defaultRes = "Command not found. To use this bot type `!civ mention [Steam Username]` to mention someone who's been added to this app. Type `!civ help` for more info.";
 
-      return defaultRes;
+      sendResponse(defaultRes);
   }
 });
 
